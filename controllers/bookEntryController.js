@@ -7,6 +7,7 @@ const { default: mongoose } = require("mongoose");
 
 const addBookEntryController = async(req,res)=>{
     try {
+     console.log(req);
      
       const id =new mongoose.Types.ObjectId()
       console.log(id);
@@ -25,7 +26,7 @@ const addBookEntryController = async(req,res)=>{
       const image2 = await uploadImageToCloudinary(req.body.BackImage, id);
       req.body.FrontImage = image1.url;      
       req.body.BackImage = image2.url;
-      const savedProduct = await BookEntry.create({...req.body,_id:id})
+      const savedProduct = await BookEntry.create({...req.body.bookdata,_id:id})
       res.status(200).json(savedProduct);
         // res
         // .status(200).json({
@@ -43,10 +44,10 @@ const addBookEntryController = async(req,res)=>{
 
 const getBookEntryController = async(req,res)=>{
   try {
-    const {userId,scheamId} =req.params
-    console.log(req.params.id);
+    const { schemename, scheamId } = req.params;
+    console.log(req.params.schemename);
     
-    const bookEntry = await BookEntry.find({userId:userId});
+    const bookEntry = await BookEntry.find({ schemename: schemename });
     res.status(200).json({
       success:true,
       message :"book entry found",
@@ -61,6 +62,8 @@ const getBookEntryController = async(req,res)=>{
 const getAllBookEntryController = async(req,res)=>{
   try {
     const allBookEntry = await BookEntry.find();
+    console.log(allBookEntry);
+    
     res.status(200).json({
       success:true,
       message :"all book entry found",

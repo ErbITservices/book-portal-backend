@@ -5,7 +5,7 @@ const { verifyToken, verifyAdminWithToken } = require('../middlewares/authMiddle
 const { addScheamController, getAllScheamController } = require('../controllers/scheamController');
 
 
-router.post('/addScheam',verifyAdminWithToken,addScheamController)
+router.post('/addScheam',addScheamController)
 router.get('/getScheam',getAllScheamController)
 
 

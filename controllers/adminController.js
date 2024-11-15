@@ -3,7 +3,7 @@ const Admin = require("../models/userModel");
 
 const registerController = async(req,res)=>{
     try {
-        const {username,contect_name,email,phone,password} = req.body;
+        const {username,contect_name,email,phone,password} = req.body.userdata;
 
         const userExist = await Admin.findOne({email:email});
 
@@ -37,10 +37,10 @@ const registerController = async(req,res)=>{
 
 const loginController= async(req,res)=>{
     try {
-        const {email,password}=req.body;
+        const {email,password}=req.body.userdata;
         const userExist = await Admin.findOne({email:email});
         if(!userExist){
-            return res.status(200).json({message:"invalid data"});
+            return res.status(400).json({message:"invalid data"});
         }
         const Match = await comparePassword(password,userExist.password);
         if(Match){

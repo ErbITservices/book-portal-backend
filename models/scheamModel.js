@@ -13,9 +13,13 @@ const scheamSchema = new mongoose.Schema(
     },
     min_book_number: {
       type: String,
-      required: true,
+      // required: true,
     },
     book_price: {
+      type: String,
+      required: true,
+    },
+    max_book_price: {
       type: String,
       required: true,
     },

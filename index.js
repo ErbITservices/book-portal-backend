@@ -4,7 +4,8 @@ const connectDB = require('./config/db');
 const cors = require('cors')
 const adminRoute= require('./routes/adminRoute')
 const scheamRoute= require('./routes/sheamRoute')
-const bookeEntryRoute= require('./routes/bookEntryRoute')
+const bookeEntryRoute = require('./routes/bookEntryRoute')
+const CategoryNameRoute = require('./routes/categoryNameRoute')
 const base_url= process.env.BASE;
 
 
@@ -17,6 +18,8 @@ connectDB();
 
 //rest object
 const app = express()
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
 
 const corsOptions = {
     origin:`${base_url}`,
@@ -36,6 +39,7 @@ app.get('/', function (req, res) {
  app.use('/api/v1/admin',adminRoute)
  app.use('/api/v1/scheam',scheamRoute)
  app.use('/api/v1/bookeEntry',bookeEntryRoute)
+ app.use("/api/v1/CategoryName", CategoryNameRoute);
 
 const PORT = process.env.PORT || 8080;
 

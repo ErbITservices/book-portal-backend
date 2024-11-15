@@ -7,7 +7,7 @@ const { verifyToken, verifyAdminWithToken } = require('../middlewares/authMiddle
 router.post('/register',registerController)
 router.post('/login',loginController)
 router.post('/admin-login', verifyAdminWithToken,loginController)
-router.get('/getAllUser',verifyAdminWithToken,getAllUserController)
+router.get('/getAllUser',getAllUserController)
 // router.get('/user-auth',verifyToken,(req,res)=>{
 //     res.status(200).send({
 //         ok:true

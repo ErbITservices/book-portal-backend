@@ -2,7 +2,15 @@ const Scheam = require("../models/scheamModel");
 
 const addScheamController = async(req,res)=>{
     try {
-        const {min_book_number,max_book_number,scheam_name,book_price,total_book_price} = req.body;
+        const {
+          min_book_number,
+          max_book_number,
+          max_book_price,
+          scheam_name,
+          book_price,
+          total_book_price,
+          scheam_status
+        } = req.body.schemedata;
         console.log(scheam_name);
         
 
@@ -16,11 +24,13 @@ const addScheamController = async(req,res)=>{
         // }        
         
         const sheamCreated = await Scheam.create({
-            scheam_name,
-            min_book_number,
-            max_book_number,
-            book_price,
-            total_book_price
+          scheam_name,
+          min_book_number,
+          max_book_number,
+          max_book_price,
+          book_price,
+          total_book_price,
+          scheam_status
         });
         console.log("5");
                 
