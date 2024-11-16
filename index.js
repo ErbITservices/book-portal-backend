@@ -1,4 +1,5 @@
 const express = require('express')
+// const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cors = require('cors')
@@ -19,7 +20,8 @@ connectDB();
 //rest object
 const app = express()
 app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb" }));
+// app.use(express.urlencoded({ limit: "50mb" }));
+// app.use(bodyParser.json()); 
 
 const corsOptions = {
     origin:`${base_url}`,

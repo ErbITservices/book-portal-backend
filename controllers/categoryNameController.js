@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Category = require("../models/categoryNameModel");
 
 const addCategoryNameController = async (req, res) => {
@@ -31,8 +32,19 @@ const getCategoryNameController = async (req, res) => {
        
       });
 };
+const deleteCategoryController=async (req, res) => {
+  const id = req.params.id;
+  if(!mongoose.isValidObjectId(id)) return res.status(403).json({message: "The Category you provided is not a vaid id"})
+    try {
+      await Category.findByIdAndDelete(id);
+      res.status(200).json({message: "Category deleted Succesfully"})
+    } catch (err) {
+      console.log(err);
+      
+      res.status(500).json({message: "failed to delete Category"});
+    }
+  };
 
-
-module.exports = { addCategoryNameController, getCategoryNameController };
+module.exports = { addCategoryNameController, getCategoryNameController,deleteCategoryController };
 
 
