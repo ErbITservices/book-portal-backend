@@ -57,6 +57,27 @@ const getAllScheamController = async (req, res) => {
     });
   } catch (error) {}
 };
+
+const getOneScheamController =async(req,res)=>{
+  const scheam_name = req.params.scheam_name;
+  // if (!mongoose.isValidObjectId(scheam_name))
+  //   return res
+  //     .status(403)
+  //     .json({ message: "The Scheam you provided is not a vaid id" });
+  try {
+    const getScheam =await Scheam.findOne({scheam_name:scheam_name})
+    res.status(200).json({
+      success:true,
+      message: "Scheam get Succesfully",
+      Scheam: getScheam
+     });
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({ message: "failed to  Scheam" });
+  }
+}
+
 const putScheamController = async (req, res) => {
   try {
     const uodateScheam = await Scheam.findByIdAndUpdate(
@@ -88,4 +109,4 @@ const deleteScheamController = async (req, res) => {
     res.status(500).json({ message: "failed to delete Scheam" });
   }
 };
-module.exports = { addScheamController, getAllScheamController,deleteScheamController,putScheamController };
+module.exports = { addScheamController, getAllScheamController,getOneScheamController,deleteScheamController,putScheamController ,};
