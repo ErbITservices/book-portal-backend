@@ -4,7 +4,7 @@ const { verifyToken, verifyAdminWithToken } = require('../middlewares/authMiddle
 const { addBookEntryController, getBookEntryController, getAllBookEntryController, gettest, deleteBoolEntryController, putBoolEntryController } = require('../controllers/bookEntryController');
 
 router.post("/addBook",addBookEntryController);
-router.get("/getBook/:userId/:Category",getBookEntryController)
+router.get("/getBook/:userId/:schemename", getBookEntryController);
 router.get("/getBook/:schemename", getBookEntryController);
 router.get("/getAllBook",getAllBookEntryController)
 router.get("/gettest",gettest)

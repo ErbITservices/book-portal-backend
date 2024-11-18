@@ -7,7 +7,19 @@ const bookEntrySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    Price: {
+      type: String,
+      required: true,
+    },
     Email: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: String,
+      required: true,
+    },
+    BookPages: {
       type: String,
       required: true,
     },
