@@ -7,11 +7,8 @@ const { default: mongoose } = require("mongoose");
 
 const addBookEntryController = async(req,res)=>{
     try {
-     console.log(req);
      
-      const id =new mongoose.Types.ObjectId()
-      console.log(id);
-      
+      const id =new mongoose.Types.ObjectId();      
       // const Image1 = await uploadImageToCloudinary(req.body.FrontImage, id);
       // const BackImage = await uploadImageToCloudinary(req.body.BackImage, id);
       //   const {userId,ISBN,BookName,BookNameGuj,AuthorName,AuthorNameGuj,Publisher,PublisherName,Size,Binding,Weight,Language,Subject,PubYear,Category,} = req.body; 
@@ -26,7 +23,13 @@ const addBookEntryController = async(req,res)=>{
       const image2 = await uploadImageToCloudinary(req.body.BackImage, id);
       req.body.FrontImage = image1.url;      
       req.body.BackImage = image2.url;
+      console.log(req.body.BackImage);
+      
       const savedProduct = await BookEntry.create({...req.body.bookdata,_id:id})
+      console.log(savedProduct);
+      console.log('add book');
+      
+      
       res.status(200).json(savedProduct);
         // res
         // .status(200).json({
@@ -44,20 +47,17 @@ const addBookEntryController = async(req,res)=>{
 
 const getBookEntryController = async(req,res)=>{
   try {
-    // const newb = await BookEntry.find({userId:req.params.userId });
+    const newb = await BookEntry.find({userId:req.params.userId });
     
-    const bookEntry = await BookEntry.find();
-   const filterbook= bookEntry.filter((id)=>{
-    if (id.userId == req.params.userId && id.Category == req.params.Category) {
-      return id;
+    
+    // const bookEntry = await BookEntry.find();
+    
+   const filterbook= newb.filter((id)=>{
+    if ( id.schemename == req.params.Category) {return id;
     }
     })
-    console.log("userId",filterbook);
     
-    const { schemename, scheamId } = req.params;
-    console.log(req.params.schemename);
     
-    // const bookEntry = await BookEntry.find({ schemename: schemename });
     res.status(200).json({
       success:true,
       message :"book entry found",
@@ -161,7 +161,7 @@ const putBoolEntryController =  async (req,res) => {
 }
 
 const deleteBoolEntryController=async (req, res) => {
-  const id = req.params.id;
+  // const id = req.params.id;
   if(!mongoose.isValidObjectId(id)) return res.status(403).json({message: "The BookEntry you provided is not a vaid id"})
     try {
       await BookEntry.findByIdAndDelete(id);
@@ -173,5 +173,6 @@ const deleteBoolEntryController=async (req, res) => {
       res.status(500).json({message: "failed to delete BookEntry"});
     }
   };
+
 
   module.exports ={addBookEntryController,getBookEntryController,getAllBookEntryController,putBoolEntryController,deleteBoolEntryController,gettest};

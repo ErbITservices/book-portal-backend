@@ -7,6 +7,7 @@ const adminRoute= require('./routes/adminRoute')
 const scheamRoute= require('./routes/sheamRoute')
 const bookeEntryRoute = require('./routes/bookEntryRoute')
 const CategoryNameRoute = require('./routes/categoryNameRoute')
+const submitedRouter = require('./routes/submitRoute')
 const base_url= process.env.BASE;
 
 
@@ -42,6 +43,7 @@ app.get('/', function (req, res) {
  app.use('/api/v1/scheam',scheamRoute)
  app.use('/api/v1/bookeEntry',bookeEntryRoute)
  app.use("/api/v1/CategoryName", CategoryNameRoute);
+ app.use("/api/v1/submited", submitedRouter);
 
 const PORT = process.env.PORT || 8080;
 

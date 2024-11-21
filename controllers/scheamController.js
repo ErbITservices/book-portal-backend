@@ -17,7 +17,7 @@ const addScheamController = async (req, res) => {
     const sheamExist = await Scheam.findOne({ scheam_name: scheam_name });
 
     if (sheamExist) {
-      return res.status(400).json({ message: "email exist" });
+      return res.status(400).json({ message: "scheam exist" });
     }
     // if(sheamExist.scheam_status === "expire"){
     //     return res.status(400).json({message:"scheam is expire"});
@@ -36,7 +36,7 @@ const addScheamController = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "sheam add successful",
+      message: "scheam add successful",
       scheam: sheamCreated,
       // token:await userCreated.generateToken(),
       // userId:userCreated._id.toString(),
@@ -52,7 +52,7 @@ const getAllScheamController = async (req, res) => {
     const allScheam = await Scheam.find();
     res.status(200).json({
       success: true,
-      message: "get allSheam successful",
+      message: "get allScheam successful",
       allScheam,
     });
   } catch (error) {}

@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const Scheam = require('./scheamModel');
+const { Schema } = mongoose;
 
 const bookEntrySchema = new mongoose.Schema(
   {
@@ -52,10 +52,12 @@ const bookEntrySchema = new mongoose.Schema(
       type: String,
     },
     FrontImage: {
-      type: String,
+      type: Schema.Types.Mixed,
+      required: true,
     },
     BackImage: {
-      type: String,
+      type: Schema.Types.Mixed,
+      required: true,
     },
     Discribption: {
       type: String,
