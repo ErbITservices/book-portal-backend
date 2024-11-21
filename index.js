@@ -25,7 +25,8 @@ app.use(express.json({ limit: "50mb" }));
 // app.use(bodyParser.json()); 
 
 const corsOptions = {
-    origin:`${base_url}`,
+  origin: [`${base_url}`,"https://book-portal-admin.netlify.app","http://localhost:5173"],
+    
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
   };

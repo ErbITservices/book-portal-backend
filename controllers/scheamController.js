@@ -43,7 +43,7 @@ const addScheamController = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 };
 
@@ -83,7 +83,7 @@ const putScheamController = async (req, res) => {
     const uodateScheam = await Scheam.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body.schemedata,
       },
       { new: true }
     );

@@ -41,7 +41,7 @@ const addBookEntryController = async(req,res)=>{
         //  });         
     } catch (error) {
      console.error(error);
-      res.status(500).json(err);
+      res.status(500).json(error);
     }
 }
 
@@ -49,13 +49,24 @@ const getBookEntryController = async(req,res)=>{
   try {
     const newb = await BookEntry.find({userId:req.params.userId });
     
-    
     // const bookEntry = await BookEntry.find();
     
-   const filterbook= newb.filter((id)=>{
-    if ( id.schemename == req.params.Category) {return id;
+  //  const filterbook= newb.filter((id)=>{
+  //   if ( id.schemename == req.params.Category) {return id;
+  //   }
+  //   })
+
+    const bookEntry = await BookEntry.find();
+   const filterbook= bookEntry.filter((id)=>{
+    if (
+      id.userId == req.params.userId &&
+      id.schemename == req.params.schemename
+    ) {
+      return id;
     }
     })
+    console.log(req.params);
+    console.log(filterbook);
     
     
     res.status(200).json({
@@ -65,7 +76,7 @@ const getBookEntryController = async(req,res)=>{
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 }
 
@@ -81,7 +92,7 @@ const getAllBookEntryController = async(req,res)=>{
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 }
 
@@ -150,9 +161,13 @@ const putBoolEntryController =  async (req,res) => {
       req.body.BackImage = image2.url;
       // const image = await uploadImageToCloudinary(req.body.img, req.body._id);
       // req.body.img = image.url;
-      const uodateBookEntry = await BookEntry.findByIdAndUpdate(req.params.id, {
-          $set: req.body
-      },{new: true})
+      const uodateBookEntry = await BookEntry.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body.bookdata,
+        },
+        { new: true }
+      );
       res.status(200).json(uodateBookEntry)
   } catch (error) {
     console.log(error)
