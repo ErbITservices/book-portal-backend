@@ -30,5 +30,19 @@ const Submited = require("../models/submitedModel");
         });
 }
 
+const getOnesubmited = async(req,res)=>{
+  try {
+    const data =await Submited.find({userId:req.params.userId})
+    res.status(200).json({
+      success:true,
+      message :"submited get successful",
+      data:data
+      });
 
-module.exports ={getSubmited,addSubmited}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(err);
+  }
+}
+
+module.exports ={getSubmited,addSubmited,getOnesubmited}
