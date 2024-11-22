@@ -175,7 +175,7 @@ const putBoolEntryController =  async (req,res) => {
 }
 
 const deleteBoolEntryController=async (req, res) => {
-  // const id = req.params.id;
+  const id = req.params.id;
   if(!mongoose.isValidObjectId(id)) return res.status(403).json({message: "The BookEntry you provided is not a vaid id"})
     try {
       await BookEntry.findByIdAndDelete(id);
