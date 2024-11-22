@@ -3,17 +3,17 @@ const Subject = require("../models/subjectModel");
 
 
 const addSubjectController = async (req, res) => {
-    const {CategoryName } = req.body.categorydata;
+    const {SubjectName } = req.body.Subjectdata;
     
     const existSubjectSubject = await Subject.findOne({
-      CategoryName:CategoryName,
+     SubjectName:SubjectName,
     });
     
     if (existSubjectSubject) {
         return res.status(400).json({ message: "SubjectSubject exist" });
     }
        const SubjectCreated = await Subject.create({
-        CategoryName, 
+       SubjectName, 
        });
        res.status(200).json({
          success: true,
