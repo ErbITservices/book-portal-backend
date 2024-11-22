@@ -3,7 +3,7 @@ const Subject = require("../models/subjectModel");
 
 
 const addSubjectController = async (req, res) => {
-    const {SubjectName } = req.body;
+    const {SubjectName } = req.body.categorydata;
     
     const existSubjectSubject = await Subject.findOne({
      SubjectName:SubjectName,
