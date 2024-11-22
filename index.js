@@ -1,4 +1,6 @@
 const express = require('express')
+const cluster = require("cluster");
+const os = require("os")
 // const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -8,9 +10,16 @@ const scheamRoute= require('./routes/sheamRoute')
 const bookeEntryRoute = require('./routes/bookEntryRoute')
 const CategoryNameRoute = require('./routes/categoryNameRoute')
 const submitedRouter = require('./routes/submitRoute')
+const subjectRoute = require('./routes/subjectRoute')
 const base_url= process.env.BASE;
 
+const cpu = os.cpus().length;
 
+if (cluster.isPrimary) {
+  for (let index = 0; index < cpu; index++) {
+    cluster.fork();
+  }
+} else {
 
 //configuer  env 
 dotenv.config();
@@ -44,10 +53,14 @@ app.get('/', function (req, res) {
  app.use('/api/v1/scheam',scheamRoute)
  app.use('/api/v1/bookeEntry',bookeEntryRoute)
  app.use("/api/v1/CategoryName", CategoryNameRoute);
+ app.use("/api/v1/subject", subjectRoute);
  app.use("/api/v1/submited", submitedRouter);
+ 
 
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)
 })
+
+}

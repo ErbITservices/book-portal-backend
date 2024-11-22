@@ -23,7 +23,7 @@ const bookEntrySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ISBN: {
+    ISBN:{
       type: String,
       required: true,
     },
