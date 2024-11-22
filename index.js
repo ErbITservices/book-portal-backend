@@ -12,6 +12,7 @@ const base_url= process.env.BASE;
 
 
 
+
 //configuer  env 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.use(express.json({ limit: "50mb" }));
 // app.use(bodyParser.json()); 
 
 const corsOptions = {
-  origin: ["https://erb-book-portal.netlify.app","https://book-portal-admin.netlify.app","http://localhost:5173"],
+  origin: ["http://localhost:5173","https://erb-book-portal.netlify.app","https://book-portal-admin.netlify.app"],
     
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
