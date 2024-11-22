@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 const Category = require("../models/categoryNameModel");
 
 const addCategoryNameController = async (req, res) => {
-    const { CategoryName } = req.body;
+    const { CategoryName } = req.body.categorydata;
     console.log(CategoryName);
     const existCategory = await Category.findOne({
       CategoryName: CategoryName,

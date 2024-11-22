@@ -19,15 +19,14 @@ const addBookEntryController = async(req,res)=>{
       //     Size,Binding,Weight,Language,Subject,PubYear,Category,FrontImage,
       //     BackImage
       //   });
-      const image1 = await uploadImageToCloudinary(req.body.FrontImage, id);
-      const image2 = await uploadImageToCloudinary(req.body.BackImage, id);
-      req.body.FrontImage = image1.url;      
-      req.body.BackImage = image2.url;
-      console.log(req.body.BackImage);
+      // const image1 = await uploadImageToCloudinary(req.body.FrontImage, id);
+      // const image2 = await uploadImageToCloudinary(req.body.BackImage, id);
+      // req.body.FrontImage = image1.url;      
+      // req.body.BackImage = image2.url;
+      // console.log(req.body.BackImage);
       
       const savedProduct = await BookEntry.create({...req.body.bookdata,_id:id})
-      console.log(savedProduct);
-      console.log('add book');
+      
       
       
       res.status(200).json(savedProduct);
@@ -155,10 +154,10 @@ const gettest = async (req, res) => {
 
 const putBoolEntryController =  async (req,res) => {
   try {
-    const image1 = await uploadImageToCloudinary(req.body.FrontImage, req.body._id);
-      const image2 = await uploadImageToCloudinary(req.body.BackImage, req.body._id);
-      req.body.FrontImage = image1.url;      
-      req.body.BackImage = image2.url;
+    // const image1 = await uploadImageToCloudinary(req.body.FrontImage, req.body._id);
+    //   const image2 = await uploadImageToCloudinary(req.body.BackImage, req.body._id);
+    //   req.body.FrontImage = image1.url;      
+    //   req.body.BackImage = image2.url;
       // const image = await uploadImageToCloudinary(req.body.img, req.body._id);
       // req.body.img = image.url;
       const uodateBookEntry = await BookEntry.findByIdAndUpdate(
@@ -176,7 +175,7 @@ const putBoolEntryController =  async (req,res) => {
 }
 
 const deleteBoolEntryController=async (req, res) => {
-  // const id = req.params.id;
+  const id = req.params.id;
   if(!mongoose.isValidObjectId(id)) return res.status(403).json({message: "The BookEntry you provided is not a vaid id"})
     try {
       await BookEntry.findByIdAndDelete(id);

@@ -63,14 +63,7 @@ const bookEntrySchema = new mongoose.Schema(
     Category: {
       type: String,
     },
-    FrontImage: {
-      type: Schema.Types.Mixed,
-      required: true,
-    },
-    BackImage: {
-      type: Schema.Types.Mixed,
-      required: true,
-    },
+    
     Discribption: {
       type: String,
     },
