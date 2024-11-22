@@ -9,6 +9,9 @@ const bookeEntryRoute = require('./routes/bookEntryRoute')
 const CategoryNameRoute = require('./routes/categoryNameRoute')
 const submitedRouter = require('./routes/submitRoute')
 const base_url= process.env.BASE;
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
 
 
 
