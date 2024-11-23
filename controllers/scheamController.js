@@ -78,6 +78,28 @@ const getOneScheamController =async(req,res)=>{
   }
 }
 
+const getActiveScheamController =async(req,res)=>{
+
+  try {
+    const getActiveScheam =await Scheam.find({ scheam_status:"Active"})
+    console.log(getActiveScheam);
+    
+  
+    if(getActiveScheam[0] == null){
+      return res.status(404).json({ message: "No active Scheam found" });
+    }
+    res.status(200).json({
+      success:true,
+      message: "Scheam get Succesfully",
+      Scheam: getActiveScheam
+     });
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({ message: "failed to  Scheam" });
+  }
+}
+
 const putScheamController = async (req, res) => {
   try {
     const uodateScheam = await Scheam.findByIdAndUpdate(
@@ -109,4 +131,4 @@ const deleteScheamController = async (req, res) => {
     res.status(500).json({ message: "failed to delete Scheam" });
   }
 };
-module.exports = { addScheamController, getAllScheamController,getOneScheamController,deleteScheamController,putScheamController ,};
+module.exports = { addScheamController, getAllScheamController,getOneScheamController,deleteScheamController,putScheamController ,getActiveScheamController};

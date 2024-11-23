@@ -188,5 +188,50 @@ const deleteBoolEntryController=async (req, res) => {
     }
   };
 
+  const getScheamBookController = async(req,res)=>{
+    console.log(req.params.schemename);
+    
+    try {
+      const allScheamBookEntry = await BookEntry.find({schemename:req.params.schemename});
+      console.log(allScheamBookEntry);
+      if (!allScheamBookEntry) {
+        res.status(500).json({
+          message: "No data found",
+        });
+      }
+      
+      res.status(200).json({
+        success:true,
+        message :"all book entry found",
+        bookEntry:allScheamBookEntry
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json(error);
+    }
+  }
 
-  module.exports ={addBookEntryController,getBookEntryController,getAllBookEntryController,putBoolEntryController,deleteBoolEntryController,gettest};
+  const getActiveBookController = async(req,res)=>{
+    console.log(req.params.schemename);
+    
+    try {
+      const allScheamBookEntry = await BookEntry.find({schemename:req.params.schemename});
+      console.log(allScheamBookEntry);
+      if (!allScheamBookEntry) {
+        res.status(500).json({
+          message: "No data found",
+        });
+      }
+      
+      res.status(200).json({
+        success:true,
+        message :"all book entry found",
+        bookEntry:allScheamBookEntry
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json(error);
+    }
+  }
+
+  module.exports ={addBookEntryController,getBookEntryController,getAllBookEntryController,putBoolEntryController,deleteBoolEntryController,gettest,getScheamBookController};
