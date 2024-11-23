@@ -13,7 +13,7 @@ const submitedRouter = require('./routes/submitRoute')
 const subjectRoute = require('./routes/subjectRoute')
 const base_url= process.env.BASE;
 
-const cpu = os.cpus().length;
+// const cpu = os.cpus().length;
 
 
 
