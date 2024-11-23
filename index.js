@@ -15,11 +15,11 @@ const base_url= process.env.BASE;
 
 const cpu = os.cpus().length;
 
-if (cluster.isPrimary) {
-  for (let index = 0; index < cpu; index++) {
-    cluster.fork();
-  }
-} else {
+// if (cluster.isPrimary) {
+//   for (let index = 0; index < cpu; index++) {
+//     cluster.fork();
+//   }
+// } else {
 
 
 //configuer  env 
@@ -64,4 +64,4 @@ app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)
 })
 
-}
+// }
