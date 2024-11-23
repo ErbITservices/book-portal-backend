@@ -35,7 +35,7 @@ app.use(express.json({ limit: "50mb" }));
 // app.use(bodyParser.json()); 
 
 const corsOptions = {
-  origin: ["http://localhost:5173","https://erb-book-portal.netlify.app","https://book-portal-admin.netlify.app"],
+  origin: ["https://gpmbooks.com","http://localhost:5173","https://erb-book-portal.netlify.app","https://book-portal-admin.netlify.app"],
     
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
