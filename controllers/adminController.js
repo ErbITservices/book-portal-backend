@@ -126,7 +126,7 @@ const loginController= async(req,res)=>{
               form: "erbitservices@gmail.com",
               to: email,
               subject: "password reset link",
-              text: `${process.env.BASE}/ConfirmPassword/${setusertoken._id}/${token}`,
+              text: ` Password Rest Link :-   ${process.env.BASE}/ConfirmPassword/${setusertoken._id}/${token}`,
             };
     
             transporter.sendMail(mailOptions, (error, info) => {
