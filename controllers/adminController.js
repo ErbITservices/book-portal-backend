@@ -98,7 +98,7 @@ const loginController= async(req,res)=>{
 
     const sendpasswordlink = async (req, res) => {
     
-        const {email}= req.body;
+        const {email}= req.body.userdata;
         console.log(email);
         
         if(!email){
