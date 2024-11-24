@@ -163,7 +163,7 @@ const loginController= async(req,res)=>{
 
     const updatepassword = async (req, res) => {
         const {id,token}= req.params;
-        const {password}= req.body;
+        const {password}= req.body.userdata;
         try {
             const validuser= await Admin.findOne({_id:id,verifytoken:token})
             const verifyToken= jwt.verify(token,process.env.JWT_SECRET)
