@@ -68,6 +68,9 @@ const bookEntrySchema = new mongoose.Schema(
     Discribption: {
       type: String,
     },
+    User_name: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
