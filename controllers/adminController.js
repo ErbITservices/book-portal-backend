@@ -99,7 +99,7 @@ const loginController= async(req,res)=>{
 
     const sendpasswordlink = async (req, res) => {
     
-        const {email}= req.body;
+        const {email}= req.body.userdata;
         console.log(email);
         
         if(!email){
@@ -127,7 +127,7 @@ const loginController= async(req,res)=>{
               form: "erbitservices@gmail.com",
               to: email,
               subject: "password reset link",
-              text: `${process.env.BASE}/ConfirmPassword/${setusertoken._id}/${token}`,
+              text: ` Password Rest Link :-   https://gpmbooks.com/ConfirmPassword/${setusertoken._id}/${token}`,
             };
     
             transporter.sendMail(mailOptions, (error, info) => {
@@ -164,7 +164,7 @@ const loginController= async(req,res)=>{
 
     const updatepassword = async (req, res) => {
         const {id,token}= req.params;
-        const {password}= req.body;
+        const {password}= req.body.userdata;
         try {
             const validuser= await Admin.findOne({_id:id,verifytoken:token})
             const verifyToken= jwt.verify(token,process.env.JWT_SECRET)
