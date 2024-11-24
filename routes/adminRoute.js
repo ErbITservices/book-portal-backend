@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const {registerController, loginController, getAllUserController, sendpasswordlink, updatepassword, getforgotpassword}=require('../controllers/adminController')
+const {registerController, loginController, getAllUserController, sendpasswordlink, updatepassword, getforgotpassword, deleteController}=require('../controllers/adminController')
 const { verifyToken, verifyAdminWithToken } = require('../middlewares/authMiddleware')
 
 
 router.post('/register',registerController)
 router.post('/login',loginController)
-
+router.delete('/deleteUser/:id',deleteController)
 router.post('/admin-login', verifyAdminWithToken,loginController)
 router.get('/getAllUser',getAllUserController)
 router.post('/sendpasswordlink',sendpasswordlink)

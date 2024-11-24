@@ -2,7 +2,8 @@ const { hashPassword, comparePassword } = require("../helpers/authHelper");
 const Admin = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { default: mongoose } = require("mongoose");
 
 
 
@@ -180,4 +181,22 @@ const loginController= async(req,res)=>{
                     }
     }
 
-module.exports ={sendpasswordlink,getforgotpassword,updatepassword,registerController , loginController,getAllUserController};
+    const deleteController = async (req, res) => {
+        const id = req.params.id;
+        if (!mongoose.isValidObjectId(id))            
+          return res
+            .status(403)
+            .json({ message: "The User you provided is not a vaid id" });
+        try {
+          const loko = await Admin.findByIdAndDelete(id);
+          console.log(loko);
+          
+          res.status(200).json({ message: "User deleted Succesfully" });
+        } catch (err) {
+          console.log(err);
+      
+          res.status(500).json({ message: "failed to delete User" });
+        }
+      };
+
+module.exports ={sendpasswordlink,getforgotpassword,updatepassword,registerController , loginController,getAllUserController,deleteController};
