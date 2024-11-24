@@ -1,5 +1,19 @@
 const { hashPassword, comparePassword } = require("../helpers/authHelper");
 const Admin = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const nodemailer = require('nodemailer')
+const jwt = require('jsonwebtoken')
+
+
+
+
+const transporter = nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user:"erbitservices@gmail.com",
+        pass:"rorvwwarciklfgyw"
+    }
+})
 
 const registerController = async(req,res)=>{
     try {
@@ -82,6 +96,88 @@ const loginController= async(req,res)=>{
         }
     }
 
+    const sendpasswordlink = async (req, res) => {
+    
+        const {email}= req.body;
+        console.log(email);
+        
+        if(!email){
+            return res.status(400).json({msg:"invalid email"});
+        };
+        try {
+          const userfind = await Admin.findOne({ email: email });
+          console.log(userfind);
+          
+          if (!userfind) {
+            return res.status(400).json({ msg: "invalid email" });
+          }
+          const token = jwt.sign({ _id: userfind._id }, process.env.JWT_SECRET, {
+            expiresIn: "1d",
+          });
+          console.log(token);
+          
+          const setusertoken = await Admin.findByIdAndUpdate(
+            { _id: userfind._id },
+            { verifytoken: token },
+            { new: true }
+          );
+          if (setusertoken) {
+            const mailOptions = {
+              form: "erbitservices@gmail.com",
+              to: email,
+              subject: "password reset link",
+              text: `${process.env.BASE}/ConfirmPassword/${setusertoken._id}/${token}`,
+            };
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return res.status(400).json({ msg: "error sending mail" });
+              } else {
+                res
+                  .status(200)
+                  .json({ msg: "password reset link sent to your email" });
+              }
+            });
+          }
+          console.log("complet email send", userfind._id, token);
+        } catch (error) {
+            
+        }
+        
+    }
 
+    const getforgotpassword = async (req, res) => {
+        const {id,token}= req.params;
+        try {
+            const validuser= await Admin.findOne({_id:id,verifytoken:token})
+            const verifyToken= jwt.verify(token,process.env.JWT_SECRET)
+            if(verifyToken._id && validuser){
+                res.status(200).json({msg:"password reset link is valid",validuser});
+            }else{
+                res.status(400).json({msg:"invalid link"});
+            }
+        } catch (error) {
+            res.status(400).json({msg:"invalid link"});
+        }
+    }
 
-module.exports ={registerController , loginController,getAllUserController};
+    const updatepassword = async (req, res) => {
+        const {id,token}= req.params;
+        const {password}= req.body;
+        try {
+            const validuser= await Admin.findOne({_id:id,verifytoken:token})
+            const verifyToken= jwt.verify(token,process.env.JWT_SECRET)
+            if(verifyToken._id && validuser){
+                const hashedpassword= await bcrypt.hash(password,10);
+                const setpassword= await Admin.findByIdAndUpdate({_id:id},{password:hashedpassword},{new:true});
+                setpassword.save();
+                res.status(200).json({msg:"password updated successfully",setpassword});
+                }else{
+                    res.status(400).json({msg:"invalid link"});
+                    }
+                    } catch (error) {
+                        res.status(400).json({msg:"invalid link"});
+                    }
+    }
+
+module.exports ={sendpasswordlink,getforgotpassword,updatepassword,registerController , loginController,getAllUserController};

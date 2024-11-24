@@ -1,13 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const {registerController, loginController, getAllUserController}=require('../controllers/adminController')
+const {registerController, loginController, getAllUserController, sendpasswordlink, updatepassword, getforgotpassword}=require('../controllers/adminController')
 const { verifyToken, verifyAdminWithToken } = require('../middlewares/authMiddleware')
 
 
 router.post('/register',registerController)
 router.post('/login',loginController)
+
 router.post('/admin-login', verifyAdminWithToken,loginController)
 router.get('/getAllUser',getAllUserController)
+router.post('/sendpasswordlink',sendpasswordlink)
+router.get('/forgotpassword/:id/:token',getforgotpassword)
+router.post('/:id/:token',updatepassword)
 // router.get('/user-auth',verifyToken,(req,res)=>{
 //     res.status(200).send({
 //         ok:true

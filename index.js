@@ -45,6 +45,7 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+
 //routes
  app.use('/api/v1/admin',adminRoute)
  app.use('/api/v1/scheam',scheamRoute)
