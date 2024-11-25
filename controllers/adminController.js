@@ -126,8 +126,10 @@ const loginController= async(req,res)=>{
             const mailOptions = {
               form: "erbitservices@gmail.com",
               to: email,
-              subject: "password reset link",
-              text: ` Password Rest Link :-   https://gpmbooks.com/ConfirmPassword/${setusertoken._id}/${token}`,
+              subject: "Gujarati Prakashak Mandal Password Reset",
+              text: `Dear Member, 
+              
+              Please Click Link Below To Reset Your GPMBooks.com Password.  https://gpmbooks.com/ConfirmPassword/${setusertoken._id}/${token}`,
             };
     
             transporter.sendMail(mailOptions, (error, info) => {
