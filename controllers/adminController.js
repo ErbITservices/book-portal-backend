@@ -128,8 +128,8 @@ const loginController= async(req,res)=>{
               to: email,
               subject: "Gujarati Prakashak Mandal Password Reset",
               text: `Dear Member, 
-              
-              Please Click Link Below To Reset Your GPMBooks.com Password.  https://gpmbooks.com/ConfirmPassword/${setusertoken._id}/${token}`,
+              Please Click Link Below To Reset Your GPMBooks.com Password.
+               https://gpmbooks.com/ConfirmPassword/${setusertoken._id}/${token}`,
             };
     
             transporter.sendMail(mailOptions, (error, info) => {
