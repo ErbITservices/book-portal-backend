@@ -28,7 +28,7 @@ const getSubjectController = async (req, res) => {
         success: true,
         message: "SubjectSubjectName get successful",
        Subject: getCatgory,
-       
+
       });
 };
 const deleteSubjectController=async (req, res) => {

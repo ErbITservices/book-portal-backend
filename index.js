@@ -45,6 +45,7 @@ const corsOptions = {
 
 app.use(express.json())
 
+app.options("*", cors(corsOptions));
 app.get('/', function (req, res) {
   res.send('Hello World')
 })
